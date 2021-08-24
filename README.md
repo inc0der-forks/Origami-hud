@@ -1,6 +1,6 @@
-# Origami DevTools
+# Origami HUD
 
-A plugin for `RPG Paper Maker` that adds useful options for easier development of plugins and games.
+A plugin for `RPG Paper Maker` that adds a basic player HUD to the game's map scene.
 
 ## Getting Started
 
