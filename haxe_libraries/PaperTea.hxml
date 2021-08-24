@@ -1,0 +1,10 @@
+# @install: lix --silent download "gh://github.com/LunaTechsDev/PaperTea#4f4dc32cab5c702209daa9a817ee8a2c23ce3f77" into PaperTea/0.8.0-alpha/github/4f4dc32cab5c702209daa9a817ee8a2c23ce3f77
+-lib electron
+-lib howlerjs
+-lib hxnodejs
+-lib jsImport
+-lib threejs
+-lib toy-box
+-cp F:\Projects\LunaTechsDev\PaperTea/src/
+# -cp ${HAXE_LIBCACHE}/PaperTea/0.8.0-alpha/github/4f4dc32cab5c702209daa9a817ee8a2c23ce3f77/src/
+-D PaperTea=0.8.0-alpha

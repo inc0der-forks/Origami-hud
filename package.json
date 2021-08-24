@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "@lunatechs/lunatea-napkin": "file:../../LunaTeaNapkin",
+    "electron": "^13.2.1",
+    "lix": "^15.10.1",
+    "nodemon": "^2.0.12",
+    "prettier": "^2.3.2"
+  },
+  "scripts": {
+    "build": "lix compile.hxml",
+    "watch": "nodemon -e hx,json --watch ./src/**/* --exec lix compile.hxml",
+    "pretty-quick": "pretty-quick --staged",
+    "ci-checkstyle": "npx haxelib run checkstyle -s ./src --exitcode"
+  }
+}

@@ -1,0 +1,56 @@
+name: Build Plugin - Nightly Version
+
+on: 
+  push:
+    branches:
+      - main
+    
+jobs:
+  checkstyle:
+   name: Run checkstyle on plugin
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v2
+     - uses: actions/setup-node@v1
+     - uses: inc0der-forks/setup-lix@master
+       with:
+         node-version: 12
+     - run: lix download
+     - run: lix install haxelib:checkstyle
+     - run: npm ci
+     - run: npm run ci-checkstyle
+
+  build:
+    name: Build plugin
+    runs-on: ubuntu-latest
+    needs: checkstyle
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - uses: inc0der-forks/setup-lix@master
+      - run: lix download
+      - run: npm ci
+      - run: npm run build
+      - name: Archive nightly build
+        uses: actions/upload-artifact@v2
+        with:
+          name: nightly
+          path: dist
+
+  publish:
+   name: Publish to Itch Nightly Channel
+   runs-on: ubuntu-latest
+   needs: build
+   steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: nightly
+    - uses: josephbmanley/butler-publish-itchio-action@master
+      env:
+        BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+        CHANNEL: nightly
+        ITCH_GAME: ${{ github.event.repository.name }}
+        ITCH_USER: ${{ github.event.organization.name }}
+        PACKAGE: dist

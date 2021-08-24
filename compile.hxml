@@ -1,0 +1,26 @@
+-lib PaperTea
+-lib tink_macro
+
+-cp src
+
+--macro core.Macros.setOutput()
+--macro core.Macros.copyDetails()
+
+--dce full
+
+-D js-es=6
+-D js-classic
+
+-main Main
+
+--each
+--next
+# Filled out via a macro
+--js game\
+
+--next
+-D dist
+# Filled out via a macro
+--js dist\
+
+--macro core.Macros.runNapkin()
