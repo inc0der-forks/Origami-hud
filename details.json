@@ -3,32 +3,44 @@
   "category": 3,
   "defaultParameters": [
     {
+      "defaultValue": { "k": 10, "v": true },
+      "description": "Display the leaders face picture?",
+      "id": -1,
+      "name": "Display Face"
+    },
+    {
       "defaultValue": { "k": 37, "v": 3 },
       "description": "The health statistic used for health",
       "id": -1,
       "name": "Health Stat"
     },
     {
-      "defaultValue": { "k": 10, "v": true },
-      "description": "Display the leaders face picture?",
+      "defaultValue": { "k": 37, "v": 2 },
+      "description": "The experience statistic used for displaying the leaders experience",
       "id": -1,
-      "name": "Display Face"
+      "name": "Experience Stat"
     }
   ],
   "description": "A plugin which adds a HUD to the map which displays the current party leader information",
   "name": "OrigamiHUD",
   "parameters": [
     {
+      "defaultValue": { "k": 10, "v": true },
+      "description": "Display the leaders face picture?",
+      "id": -1,
+      "name": "Display Face"
+    },
+    {
       "defaultValue": { "k": 37, "v": 3 },
       "description": "The health statistic used for health",
       "id": -1,
       "name": "Health Stat"
     },
     {
-      "defaultValue": { "k": 10, "v": true },
-      "description": "Display the leaders face picture?",
+      "defaultValue": { "k": 37, "v": 2 },
+      "description": "The experience statistic used for displaying the leaders experience",
       "id": -1,
-      "name": "Display Face"
+      "name": "Experience Stat"
     }
   ],
   "website": "https://lunatechs.dev"

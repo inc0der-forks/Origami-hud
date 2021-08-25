@@ -6,47 +6,69 @@ import pm.graphic.Base;
 import pm.graphic.Text;
 import pm.core.Game;
 import pm.core.Player;
-
-using extensions.Player;
+import pm.core.Enums.Align;
 
 class HudContents extends Base {
-  var actorText: Text;
+  var actorNameText: Text;
+  var actorLevelText: Text;
   var game: Game;
-  var gauge: Gauge;
+  var healthGauge: Gauge;
+  var expGauge: Gauge;
   var hpStat: Statistic;
+  var expStat: Statistic;
   var leader: Player;
 
   public function new() {
     super();
     hpStat = Plugins.getParameter('OrigamiHUD', 'Health Stat');
+    expStat = Plugins.getParameter('OrigamiHUD', 'Experience Stat');
     leader = Game.current.teamHeroes[0];
-    actorText = new Text(leader.name, {
+    actorNameText = new Text(leader.name, {
       fontSize: 20
     });
 
-    gauge = {
-      value: getActorHp(leader),
-      max: getActorHp(leader, true),
+    actorLevelText = new Text('Level ${leader.getCurrentLevel()}', {
+      fontSize: 20,
+      align: Align.Right
+    });
+
+    healthGauge = {
+      value: getActorStatValue(leader, hpStat),
+      max: getActorStatValue(leader, hpStat, true),
       color: '#f75456',
-      text: 'Health'
+      text: hpStat.name()
+    };
+
+    expGauge = {
+      value: getActorStatValue(leader, expStat),
+      max: getActorStatValue(leader, expStat, true),
+      color: '#1262b7',
+      text: expStat.name()
     };
 
   }
 
-  public function getActorHp(actor: Player, ?isMax: Bool = false) {
+  public function getActorStatValue(actor: Player, stat: Statistic,  ?isMax: Bool = false) {
     if (isMax) {
-      return Reflect.getProperty(actor, hpStat.getMaxAbbreviation());
+      return Reflect.getProperty(actor, stat.getMaxAbbreviation());
     }
-    return Reflect.getProperty(actor, hpStat.abbreviation);
+    return Reflect.getProperty(actor, stat.abbreviation);
   }
   
   public override function update() {
-    gauge.updateValue(getActorHp(leader));
+    var hp = getActorStatValue(leader, hpStat);
+    var mhp = getActorStatValue(leader, hpStat, true);
+    var exp = getActorStatValue(leader, expStat);
+    var maxExp = getActorStatValue(leader, expStat, true);
+
+    healthGauge.updateValue(hp, mhp, true);
+    expGauge.updateValue(exp, maxExp);
   }
 
   public override function draw(x: Float, y: Float, w: Float, h: Float, ?positionResize: Bool): Void {
-    actorText.draw(x, y);
-    gauge.draw(x, y + 20, w, 20);
-    trace(x, y, w, h);
+    actorNameText.draw(x, y);
+    actorLevelText.draw(x, y, w);
+    healthGauge.draw(x, y + 20, w, 20);
+    expGauge.draw(x, y + 45, w, 15);
   }
 }

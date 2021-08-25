@@ -55,11 +55,14 @@ class Gauge extends Bitmap {
     });
   }
 
-  public function updateValue(value: Float) {
-    if (this.value != value) {
+  public function updateValue(?value: Float, ?max: Float, ?forceMaxUpdate = false) {
+    if (this.value != value || this.max != max) {
+      if (this.value >= this.max || forceMaxUpdate) {
+        this.max = max;
+      }
       this.value = value;
-      valuesText.setText('${value} / ${max}');
-      rate = value / max;
+      valuesText.setText('${this.value} / ${this.max}');
+      rate = this.value / this.max;
     }
   }
 
