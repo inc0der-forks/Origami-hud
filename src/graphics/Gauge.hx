@@ -5,7 +5,6 @@ import pm.core.Enums.Align;
 import pm.core.Bitmap;
 import pm.common.Platform;
 import pm.graphic.Text;
-import pm.common.Utils;
 import pm.common.ScreenResolution;
 
 @:build(macros.BuildMacros.structInitDefaults())
@@ -24,28 +23,33 @@ class Gauge extends Bitmap {
   var color: String;
   var fontSize: Float;
 
+  private static function defaultValue(value: Any, defaultValue: Any) {
+    return value == null ? defaultValue : value;
+  }
+
   public function new() {
     super();
-    text = Utils.defaultValue(text, '');
-    max = Utils.defaultValue(max, value);
-    color = Utils.defaultValue(color, '#f75456');
-    strokeWidth = Utils.defaultValue(strokeWidth, 1);
-    strokeColor = Utils.defaultValue(strokeColor, '#1c2226');
-    color = Utils.defaultValue(color, '#f75456');
-    backColor = Utils.defaultValue(backColor, '#010411');
-    fontSize = Utils.defaultValue(fontSize, 16);
-    rate = value / max;
+    this.value = value;
+    this.text = text;
+    this.max = defaultValue(max, value);
+    this.color = defaultValue(color, '#f75456');
+    this.strokeWidth = defaultValue(strokeWidth, 1);
+    this.strokeColor = defaultValue(strokeColor, '#1c2226');
+    this.color = defaultValue(color, '#f75456');
+    this.backColor = defaultValue(backColor, '#010411');
+    this.fontSize = defaultValue(fontSize, 16);
+    this.rate = value / max;
 
-    if (text != null) {
+    if (this.text != null) {
       nameText = new Text(text, {
-        fontSize: fontSize,
+        fontSize: this.fontSize,
         align: Align.Left,
         verticalAlign: AlignVertical.Center
       });
     }
 
     valuesText = new Text('${value} / ${max}', {
-      fontSize: fontSize,
+      fontSize: this.fontSize,
       align: Align.Right,
       verticalAlign: AlignVertical.Center
     });
@@ -76,7 +80,7 @@ class Gauge extends Bitmap {
     Platform.ctx.strokeStyle = strokeColor;
     Platform.ctx.strokeRect(x2, y2, w2, h2);
     Platform.ctx.restore();
-    if (text != null) {
+    if (nameText != null) {
       nameText.draw(x, y, w, h);
     }
     if (valuesText != null) {
