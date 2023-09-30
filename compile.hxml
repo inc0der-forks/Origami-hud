@@ -3,7 +3,6 @@
 
 -cp src
 
---macro core.Macros.setOutput()
 --macro core.Macros.copyDetails()
 
 --dce full
@@ -13,13 +12,6 @@
 
 -main Main
 
---each
---next
-# Filled out via a macro
---js game\
-
---next
--D dist
 # Filled out via a macro
 --js dist\
 

@@ -8,20 +8,27 @@ import pm.core.Game;
 import pm.core.Player;
 import pm.core.Enums.Align;
 
+typedef GaugeOptions = {
+  fontSize: Int,
+  stat: Statistic
+}
+
 class HudContents extends Base {
   var actorNameText: Text;
   var actorLevelText: Text;
   var game: Game;
   var healthGauge: Gauge;
   var expGauge: Gauge;
-  var hpStat: Statistic;
-  var expStat: Statistic;
+  var hpGaugeOptions: GaugeOptions;
+  var expGaugeOptions: GaugeOptions;
   var leader: Player;
 
   public function new() {
     super();
-    hpStat = Plugins.getParameter('OrigamiHUD', 'Health Stat');
-    expStat = Plugins.getParameter('OrigamiHUD', 'Experience Stat');
+    hpGaugeOptions = Plugins.getParameter('OrigamiHUD', 'HP Gauge');
+    expGaugeOptions = Plugins.getParameter('OrigamiHUD', 'Exp Gauge');
+
+    trace(hpGaugeOptions);
     leader = Game.current.teamHeroes[0];
     actorNameText = new Text(leader.name, {
       fontSize: 20
@@ -33,17 +40,17 @@ class HudContents extends Base {
     });
 
     healthGauge = {
-      value: getActorStatValue(leader, hpStat),
-      max: getActorStatValue(leader, hpStat, true),
+      value: getActorStatValue(leader, hpGaugeOptions.stat),
+      max: getActorStatValue(leader, hpGaugeOptions.stat, true),
       color: '#f75456',
-      text: hpStat.name()
+      text: hpGaugeOptions.stat.name()
     };
 
     expGauge = {
-      value: getActorStatValue(leader, expStat),
-      max: getActorStatValue(leader, expStat, true),
+      value: getActorStatValue(leader, expGaugeOptions.stat),
+      max: getActorStatValue(leader, expGaugeOptions.stat, true),
       color: '#1262b7',
-      text: expStat.name()
+      text: expGaugeOptions.stat.name()
     };
 
   }
@@ -56,10 +63,10 @@ class HudContents extends Base {
   }
   
   public override function update() {
-    var hp = getActorStatValue(leader, hpStat);
-    var mhp = getActorStatValue(leader, hpStat, true);
-    var exp = getActorStatValue(leader, expStat);
-    var maxExp = getActorStatValue(leader, expStat, true);
+    var hp = getActorStatValue(leader, hpGaugeOptions.stat);
+    var mhp = getActorStatValue(leader, hpGaugeOptions.stat, true);
+    var exp = getActorStatValue(leader, expGaugeOptions.stat);
+    var maxExp = getActorStatValue(leader, expGaugeOptions.stat, true);
 
     healthGauge.updateValue(hp, mhp, true);
     expGauge.updateValue(exp, maxExp);

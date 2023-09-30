@@ -9,19 +9,62 @@
       "name": "Display Face"
     },
     {
-      "defaultValue": { "k": 37, "v": 3 },
-      "description": "The health statistic used for health",
+      "defaultValue": {
+        "customStructure": {
+          "id": 0,
+          "name": "",
+          "properties": [
+            {
+              "description": "The leaders health statistic",
+              "id": 0,
+              "name": "stat",
+              "value": { "k": 37, "v": 3 }
+            },
+            {
+              "description": "The size of the font for the health gauge",
+              "id": 0,
+              "name": "fontSize",
+              "value": { "k": 12, "min": 8, "v": 16 }
+            }
+          ]
+        },
+        "k": 46,
+        "v": null
+      },
+      "description": "The options for the health gauge",
       "id": -1,
-      "name": "Health Stat"
+      "name": "HP Gauge"
     },
     {
-      "defaultValue": { "k": 37, "v": 2 },
-      "description": "The experience statistic used for displaying the leaders experience",
+      "defaultValue": {
+        "customStructure": {
+          "id": 0,
+          "name": "",
+          "properties": [
+            {
+              "description": "The leaders experience statistic",
+              "id": 0,
+              "name": "stat",
+              "value": { "k": 37, "v": 2 }
+            },
+            {
+              "description": "The size of the font for the health gauge",
+              "id": 0,
+              "name": "fontSize",
+              "value": { "k": 12, "min": 8, "v": 16 }
+            }
+          ]
+        },
+        "k": 46,
+        "v": null
+      },
+      "description": "The options for the experience  gauge",
       "id": -1,
-      "name": "Experience Stat"
+      "name": "Exp Gauge"
     }
   ],
   "description": "A plugin which adds a HUD to the map which displays the current party leader information",
+  "isOn": false,
   "name": "OrigamiHUD",
   "parameters": [
     {
@@ -31,16 +74,58 @@
       "name": "Display Face"
     },
     {
-      "defaultValue": { "k": 37, "v": 3 },
-      "description": "The health statistic used for health",
+      "defaultValue": {
+        "customStructure": {
+          "id": 0,
+          "name": "",
+          "properties": [
+            {
+              "description": "The leaders health statistic",
+              "id": 0,
+              "name": "stat",
+              "value": { "k": 37, "v": 3 }
+            },
+            {
+              "description": "The size of the font for the health gauge",
+              "id": 0,
+              "name": "fontSize",
+              "value": { "k": 12, "min": 8, "v": 16 }
+            }
+          ]
+        },
+        "k": 46,
+        "v": null
+      },
+      "description": "The options for the health gauge",
       "id": -1,
-      "name": "Health Stat"
+      "name": "HP Gauge"
     },
     {
-      "defaultValue": { "k": 37, "v": 2 },
-      "description": "The experience statistic used for displaying the leaders experience",
+      "defaultValue": {
+        "customStructure": {
+          "id": 0,
+          "name": "",
+          "properties": [
+            {
+              "description": "The leaders experience statistic",
+              "id": 0,
+              "name": "stat",
+              "value": { "k": 37, "v": 2 }
+            },
+            {
+              "description": "The size of the font for the health gauge",
+              "id": 0,
+              "name": "fontSize",
+              "value": { "k": 12, "min": 8, "v": 16 }
+            }
+          ]
+        },
+        "k": 46,
+        "v": null
+      },
+      "description": "The options for the experience  gauge",
       "id": -1,
-      "name": "Experience Stat"
+      "name": "Exp Gauge"
     }
   ],
   "website": "https://lunatechs.dev"
